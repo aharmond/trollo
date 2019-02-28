@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
   def index
-    @boards = current_user.boards 
+    @boards = Board.all_boards(current_user.id)
   end
 
   def show
@@ -13,13 +13,8 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = current_user.boards.new(board_params)
-
-    if @board.save
-      redirect_to boards_path
-    else
-      render :new
-    end
+    Board.create_board(board_params, current_user.id)
+    redirect_to boards_path
   end
 
   def edit
@@ -27,7 +22,7 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      redirect_to list_path(@list)
+      redirect_to boards_path
     else
       render :edit
     end
@@ -41,7 +36,7 @@ class BoardsController < ApplicationController
   private
 
     def set_board
-      @board = Board.find(params[:id])
+      @board = Board.single_board(current_user.id, params[:id])
     end
 
     def board_params

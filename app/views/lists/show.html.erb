@@ -5,4 +5,5 @@
   <% end %>
 <%= link_to 'Add Task', new_list_task_path(@list) %>
 <%= link_to 'Edit List', edit_board_list_path(@list) %>
+<%= link_to 'Delete List', @list, method: :delete %>
 <%= link_to 'Back', board_path(@board) %>

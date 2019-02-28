@@ -14,28 +14,20 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = @board.lists.new(list_params)
-
-    if @list.save
-      redirect_to board_lists_path(@board)
-    else
-      render :new
-    end
+    List.create_list(list_params, @board.id)
+    redirect_to board_lists_path(@board)
   end
 
   def edit
   end
 
   def update
-    if @list.update(list_params)
-      redirect_to board_list_path(@list)
-    else
-      render :edit
-    end
+    List.update_list(@list.id, list_params)
+    redirect_to board_list_path(@list)
   end
 
   def destroy
-    @list.destroy
+    List.delete_list(@list.id)
     redirect_to board_lists_path(@board)
   end
 
@@ -43,14 +35,14 @@ class ListsController < ApplicationController
   
     def set_board
       if params[:board_id] != nil
-        @board = Board.find(params[:board_id])
+        @board = Board.single_board(current_user.id, params[:board_id])
       else
-        @board = Board.find(@list.board_id)
+        @board = Board.single_board(current_user.id, @list.board_id)
       end
     end
 
     def set_list
-      @list = List.find(params[:id])
+      @list = List.single_list(params[:id])
     end
 
     def list_params
