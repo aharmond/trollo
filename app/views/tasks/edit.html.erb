@@ -1,0 +1,21 @@
+<h1>Edit Task</h1>
+<%= form_with(model: [@list, @task], local: true, class: "ui form") do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :priority_number %>
+    <%= f.text_field :priority_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :finished %> <br />
+    <%= f.check_box :finished %>
+  </div>
+
+  <div class="action">
+    <button class="ui green button" type="submit">Update</button>
+  </div>
+<% end %>

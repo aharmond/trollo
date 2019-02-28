@@ -1,0 +1,10 @@
+<h1>Board Index</h1>
+<% current_user.boards.each do |board| %>
+  <%= link_to board.name, board_path(board) %>
+    <% board.lists.each do |list| %>
+      <%= list.name %>
+        <% list.tasks.each do |task| %>
+          <%= task.name %>
+        <% end %>
+    <% end %>
+<% end %>

@@ -1,0 +1,10 @@
+<h1><%= @board.name %></h1>
+  <% @board.lists.each do |list| %>
+    <%= link_to list.name, board_list_path(list) %>
+      <% list.tasks.each do |task| %>
+        <%= task.name %>
+      <% end %>
+  <% end %>
+<%= link_to 'Add List', new_board_list_path(@board) %>
+<%= link_to 'Change Board Name', edit_board_path(@board) %>
+<%= link_to 'Back', boards_path %>

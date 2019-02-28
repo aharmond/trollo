@@ -1,0 +1,12 @@
+<nav class="ui pointing menu">
+  <%= link_to 'Boards Index', boards_path, class: "item" %>
+  <%= link_to 'Add Board', new_board_path, class: "item" %>
+  <div class="right menu">
+    <% if current_user %>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "item" %>
+    <% else %>
+      <%= link_to 'Register', new_user_registration_path, class: "item" %>
+      <%= link_to 'Login', new_user_session_path, class: "item" %>
+    <% end %>
+  </div>
+</nav>

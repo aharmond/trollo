@@ -1,0 +1,11 @@
+<h1>Add Task</h1>
+<%= form_with(model: [@list, @task], local: true, class: "ui form") do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, required: true %>
+  </div>
+
+  <div class="action">
+    <button class="ui green button" type="submit">Add</button>
+  </div>
+<% end %>
