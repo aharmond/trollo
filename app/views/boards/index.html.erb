@@ -1,10 +1,28 @@
-<h1>Board Index</h1>
-<% current_user.boards.each do |board| %>
-  <%= link_to board.name, board_path(board) %>
-    <% board.lists.each do |list| %>
-      <%= list.name %>
-        <% list.tasks.each do |task| %>
-          <%= task.name %>
-        <% end %>
-    <% end %>
-<% end %>
+<h1 class="ui center aligned header">Board Index</h1>
+<div class="ui grid">
+  <% current_user.boards.each do |board| %>
+    <div class="four wide column">
+      <div class="ui card">
+        <div class="content">
+          <%= link_to board.name, board_path(board), class: "header" %>
+        </div>
+          <% board.lists.each do |list| %>
+            <div class="content">
+              <h4 class="ui sub header"><%= list.name %></h4>
+              <div class="ui small feed">
+              <% list.tasks.each do |task| %>
+                <div class="content">
+                  <% if task.finished == true %>
+                    <strike><%= task.name %></strike>
+                  <% elsif task.finished == false %>
+                    <%= task.name %>
+                  <% end %>
+                </div>
+              <% end %>
+              </div>
+            </div>  
+          <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,11 +1,34 @@
-<h1><%= @board.name %></h1>
+<h1 class="ui center aligned header"><%= @board.name %></h1>
+
+<div class="ui grid">
   <% @board.lists.each do |list| %>
-    <%= link_to list.name, board_list_path(@board, list) %>
-      <% list.tasks.each do |task| %>
-        <%= task.name %>
-      <% end %>
+    <div class="four wide column">
+      <div class="ui card">
+        <div class="content">
+          <%= link_to list.name, board_list_path(@board, list), class: "header" %>
+          <div class="ui divider"></div>
+            <div class="ui small feed">
+              <% list.tasks.each do |task| %>
+                <% if task.finished == true %>
+                  <div class="content"><strike><%= task.name %></strike></div>
+                <% elsif task.finished == false %>
+                  <div class="content"><%= task.name %></div>
+                <% end %>
+              <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
   <% end %>
-<%= link_to 'Add List', new_board_list_path(@board) %>
-<%= link_to 'Change Board Name', edit_board_path(@board) %>
-<%= link_to 'Delete Board', @board, method: :delete %>
-<%= link_to 'Back', boards_path %>
+</div>
+
+<div class="ui divider"></div>
+
+<div class="ui buttons">
+  <%= link_to 'Add List', new_board_list_path(@board), class: "ui basic green button" %>
+  <%= link_to 'Change Board Name', edit_board_path(@board), class: "ui basic yellow button" %>
+  <%= link_to 'Delete Board', @board, method: :delete, class: "ui basic red button" %>
+</div>
+
+<div class="ui hidden divider"></div>
+<%= link_to 'Back', boards_path, class: "ui button" %>

@@ -22,7 +22,7 @@ class BoardsController < ApplicationController
 
   def update
     Board.update_board(@board.id, board_params)
-    redirect_to boards_path
+    redirect_to board_path(@board)
   end
 
   def destroy

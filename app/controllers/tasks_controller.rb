@@ -19,19 +19,19 @@ class TasksController < ApplicationController
   end
 
   def update
-    List.update_list(@task.id, task_params)
+    Task.update_task(@task.id, task_params)
     redirect_to @list
   end
 
   def destroy
-    List.delete_list(@list.id)
+    Task.delete_task(@task.id)
     redirect_to @list
   end
 
   private
 
     def set_list
-      @list = List.single_list(params[:id])
+      @list = List.single_list(params[:list_id])
     end
   
     def set_task

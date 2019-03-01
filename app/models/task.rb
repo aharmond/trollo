@@ -14,9 +14,9 @@ class Task < ApplicationRecord
       INSERT INTO tasks (name, list_id, created_at, updated_at)
       VALUES (:name, :list_id, :created_at, :updated_at)
     ", {
-        name: p[:name]
+        name: p[:name],
         list_id: id,
-        created_at: DateTime.now
+        created_at: DateTime.now,
         updated_at: DateTime.now
     }])
   end

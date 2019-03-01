@@ -1,11 +1,13 @@
-<h1>Add Board</h1>
-<%= form_with(model: @board, local: true, class: "ui form") do |f| %>
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, required: true %>
-  </div>
+<h1 class="ui center aligned header">Add Board</h1>
+<div class="ui form">
+  <%= form_with(model: @board, local: true, class: "ui form") do |f| %>
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, required: true %>
+    </div>
 
-  <div class="action">
-    <button class="ui green button" type="submit">Add</button>
-  </div>
-<% end %>
+    <div class="action">
+      <button class="ui green button" type="submit">Add</button>
+    </div>
+  <% end %>
+</div>
