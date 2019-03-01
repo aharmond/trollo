@@ -21,15 +21,12 @@ class BoardsController < ApplicationController
   end
 
   def update
-    if @board.update(board_params)
-      redirect_to boards_path
-    else
-      render :edit
-    end
+    Board.update_board(@board.id, board_params)
+    redirect_to boards_path
   end
 
   def destroy
-    @board.destroy
+    Board.delete_board(@board.id)
     redirect_to boards_path
   end
 

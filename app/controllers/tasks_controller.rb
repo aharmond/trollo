@@ -11,39 +11,31 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @list.tasks.new(task_params)
-
-    if @task.save
-      redirect_to @list
-    else
-      render :new
-    end
+    Task.create_task(task_params, @list.id)
+    redirect_to @list
   end
 
   def edit
   end
 
   def update
-    if @task.update(task_params)
-      redirect_to @list
-    else
-      render :edit
-    end
+    List.update_list(@task.id, task_params)
+    redirect_to @list
   end
 
   def destroy
-    @task.destroy
+    List.delete_list(@list.id)
     redirect_to @list
   end
 
   private
 
     def set_list
-      @list = List.find(params[:list_id])
+      @list = List.single_list(params[:id])
     end
   
     def set_task
-      @task = Task.find(params[:id])
+      @task = Task.single_task(params[:id])
     end
 
     def task_params

@@ -12,11 +12,11 @@ class List < ApplicationRecord
 
   def self.create_list(p, id)
     List.find_by_sql(["
-      INSERT INTO lists (name, user_id, created_at, updated_at)
-      VALUES (:name, :user_id, :created_at, :updated_at)
+      INSERT INTO lists (name, board_id, created_at, updated_at)
+      VALUES (:name, :board_id, :created_at, :updated_at)
     ", {
         name: p[:name],
-        user_id: id,
+        board_id: id,
         created_at: DateTime.now,
         updated_at: DateTime.now
     }])
@@ -31,6 +31,11 @@ class List < ApplicationRecord
   end
 
   def self.delete_list(list_id)
+    Task.find_by_sql(["
+      DELETE FROM tasks AS t
+      WHERE t.list_id = ?
+    ;", list_id])
+
     List.find_by_sql(["
       DELETE FROM lists AS l
       WHERE l.id = ?

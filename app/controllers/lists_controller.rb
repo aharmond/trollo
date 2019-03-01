@@ -36,7 +36,7 @@ class ListsController < ApplicationController
     def set_board
       if params[:board_id] != nil
         @board = Board.single_board(current_user.id, params[:board_id])
-      else
+      elsif params[:board_id] == nil
         @board = Board.single_board(current_user.id, @list.board_id)
       end
     end
