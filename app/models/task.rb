@@ -6,6 +6,7 @@ class Task < ApplicationRecord
       SELECT *
       FROM tasks AS t
       WHERE t.id = ?
+      ORDER BY priority_number
     ", task_id]).first
   end
 
@@ -34,5 +35,11 @@ class Task < ApplicationRecord
       DELETE FROM tasks AS t
       WHERE t.id = ?
     ;", task_id])
+  end
+
+  def self.sort_importance
+    List.all.each do |list|
+      list.tasks.order(:priority_number)
+    end
   end
 end

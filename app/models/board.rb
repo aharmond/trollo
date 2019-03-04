@@ -39,6 +39,14 @@ class Board < ApplicationRecord
   end
 
   def self.delete_board(board_id)
+    @board = Board.find(board_id)
+
+    @board.lists.each do |list|
+      list.tasks.each do |task|
+        task.destroy
+      end
+    end
+
     List.find_by_sql(["
       DELETE FROM lists AS l
       WHERE l.board_id = ?

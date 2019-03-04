@@ -7,6 +7,7 @@ class List < ApplicationRecord
       SELECT *
       FROM lists AS l
       WHERE l.id = ?
+      ORDER BY priority_number
     ", list_id]).first
   end
 
